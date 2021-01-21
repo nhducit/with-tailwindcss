@@ -32,7 +32,7 @@ export default function IndexPage() {
               fetch('/static/theming.json')
                 .then((res) => res.json())
                 .then((theme) => {
-                  const rootElement = document.querySelector('.root');
+                  const rootElement = document.querySelector(':root');
                   rootElement?.style.setProperty('--primary', theme['--primary']);
                 });
             }, 2000);
