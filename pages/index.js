@@ -1,10 +1,14 @@
-import * as React from 'react'
+import * as React from 'react';
 
 export default function IndexPage() {
   React.useEffect(() => {
     setTimeout(() => {
-      const rootElement = document.querySelector('.root');
-      rootElement?.style.setProperty('--primary', 'darkcyan');
+      fetch('/static/theming.json')
+        .then((res) => res.json())
+        .then((theme) => {
+          const rootElement = document.querySelector('.root');
+          rootElement?.style.setProperty('--primary', theme['--primary']);
+        });
     }, 2000);
   }, []);
   return (
@@ -14,16 +18,24 @@ export default function IndexPage() {
           Next.js + Tailwind CSS 2.0
         </h1>
         <h1 className="mt-4">
-          The header color is `tomato`, 2 seconds after the page
-          loaded it's color will be changed to `darkcyan`
+          The header color is <span style={{ color: 'tomato' }}>`tomato`</span>,
+          2 seconds after the page loaded it's color will be changed to
+          <span style={{ color: 'darkcyan' }}>`tomato`</span> which is configured in `theming.json` file
         </h1>
         <div className="mt-4">
-          `text-primary` css class are using CSS variables, it's value can be update via javascript
+          `text-primary` css class are using CSS variables, it's value can be
+          update via javascript
         </div>
         <div className="whitespace-pre-line">
           {`
-            const rootElement = document.querySelector('.root');
-            rootElement?.style.setProperty('--primary', 'darkcyan');
+              setTimeout(() => {
+              fetch('/static/theming.json')
+                .then((res) => res.json())
+                .then((theme) => {
+                  const rootElement = document.querySelector('.root');
+                  rootElement?.style.setProperty('--primary', theme['--primary']);
+                });
+            }, 2000);
           `}
         </div>
       </div>
