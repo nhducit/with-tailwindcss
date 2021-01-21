@@ -24,9 +24,7 @@ body {
 /* Your own custom utilities */
 
 
-.root,
-#root,
-#docs-root {
+:root {
   --primary: tomato;
   --secondary: #a0aec0;
   --accent: #718096;
